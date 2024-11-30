@@ -3,6 +3,8 @@ package main
 import (
 	"echo-jwt-example/db"
 	"echo-jwt-example/router"
+	"log"
+	"os"
 )
 
 // type JwtClaims struct {
@@ -81,5 +83,11 @@ func main() {
 	defer db.CloseDB()
 	e := router.New()
 
-	e.Logger.Fatal(e.Start(":8081"))
+	port := os.Getenv("PORT")
+    if port == "" {
+        log.Fatal("PORT environment variable is not set")
+    }
+
+    // Start the server
+    e.Logger.Fatal(e.Start(":" + port))
 }
