@@ -9,7 +9,7 @@ import (
 var DB *sql.DB
 
 func InitDb() {
-	dsn := "eccommerce:yasir@11@unix(/cloudsql/fluid-shoreline-443405-p8:us-central1:ecommerce)/test"
+	dsn := "root:IBfrshdvUnKVianbererJIMQfgmFrfew@tcp(junction.proxy.rlwy.net:53264)/railway"
 
 	var err error
 	DB, err = sql.Open("mysql", dsn)
