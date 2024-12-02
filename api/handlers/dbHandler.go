@@ -16,7 +16,7 @@ func GetUsers(c echo.Context) error {
 	}
 
 	// Query to select all users
-	rows, err := db.DB.Query("SELECT id, name, email FROM Users")
+	rows, err := db.DB.Query("SELECT id, name, email FROM users")
 	if err != nil {
 		return c.String(500, "Error querying users: "+err.Error())
 	}
@@ -60,7 +60,7 @@ func AddUser(c echo.Context) error {
 		return c.String(400, "Invalid input: "+err.Error())
 	}
 
-	_, err := db.DB.Exec("INSERT INTO Users (name,email) VALUES (?,?)", user.Name, user.Email)
+	_, err := db.DB.Exec("INSERT INTO users (name,email) VALUES (?,?)", user.Name, user.Email)
 
 	if err != nil {
 		return c.String(http.StatusUnauthorized, "Error adding user : "+err.Error())

@@ -4,15 +4,22 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var DB *sql.DB
 
 func InitDb() {
-	dsn := "root:IBfrshdvUnKVianbererJIMQfgmFrfew@tcp(junction.proxy.rlwy.net:53264)/railway"
+	// Turso DB connection details
+	dbURL := "libsql://ecommerce-yasirakm.aws-us-east-1.turso.io"
+	dbAuthToken := "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MzMxMTQ4MjQsImlkIjoiMmQwZjBiMTgtY2RlZi00ODliLTk1OGMtZTRlOTQ0NGQwOTU3In0.twr2xpQd57h2xaEtVOjdx8AgDSMBb-M1nPXLS6nzkIbMeq5RjKhUzFUNbw8FPXe3zzLgfiTJH_--TQDm4Jo9Dw"
 
-	var err error
-	DB, err = sql.Open("mysql", dsn)
+	// Construct the connection string
+	connStr := fmt.Sprintf("%s?_auth_token=%s", dbURL, dbAuthToken)
+
+	// Connect to Turso DB
+	DB, err := sql.Open("sqlite3", connStr)
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
